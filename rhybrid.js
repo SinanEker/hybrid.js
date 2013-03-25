@@ -29,7 +29,7 @@ var _r = (function() {
       this.parent(document);
       this.ready = true;
       try{
-        require
+        throw require;
       }catch(e){
         if(typeOf(e) == 'object' && e.message == "require is not defined"){
           this.ready = false;
