@@ -68,7 +68,7 @@ var _b = (function() {
         return this.store(this.get('initialize').modal(),'modal');   
       }else{
         var l = new _.StringValidation();
-        if(l.stringCollection(['toggle','show','hide'],arg) || l..stringCollection(['backdrop','keyboard','show','remote'],arg)){
+        if(l.stringCollection(['toggle','show','hide'],arg) || l.stringCollection(['backdrop','keyboard','show','remote'],arg)){
           return this.store(this.get('initialize').modal(arg),'modal');    
         }else{
           return [];
@@ -81,7 +81,7 @@ var _b = (function() {
         return this.store(this.get('initialize').tooltip(),'tooltip');   
       }else{
         var l = new _.StringValidation();
-        if(l.stringCollection(['toggle','show','hide','destroy'],arg) || l..stringCollection(['animation','html','placement','selector','title','trigger','delay','container'],arg)){
+        if(l.stringCollection(['toggle','show','hide','destroy'],arg) || l.stringCollection(['animation','html','placement','selector','title','trigger','delay','container'],arg)){
           return this.store(this.get('initialize').tooltip(arg),'tooltip');    
         }else{
           return [];
@@ -94,7 +94,7 @@ var _b = (function() {
         return this.store(this.get('initialize').popover(),'popover');   
       }else{
         var l = new _.StringValidation();
-        if(l.stringCollection(['toggle','show','hide','destroy'],arg) || l..stringCollection(['animation','html','placement','selector','trigger','title','content','delay','container'],arg)){
+        if(l.stringCollection(['toggle','show','hide','destroy'],arg) || l.stringCollection(['animation','html','placement','selector','trigger','title','content','delay','container'],arg)){
           return this.store(this.get('initialize').popover(arg),'popover');    
         }else{
           return [];
@@ -115,7 +115,7 @@ var _b = (function() {
           if(arg == undefined){
             return this.store(e.datepicker(),'datepicker');    
           }else{
-            if(l.stringCollection(['show','hide','place'],arg) || l..stringCollection(['format','weekStart','viewMode','minViewMode'],arg)){
+            if(l.stringCollection(['show','hide','place'],arg) || l.stringCollection(['format','weekStart','viewMode','minViewMode'],arg)){
               return this.store(e.datepicker(arg),'datepicker');    
             }else{
               return [];
