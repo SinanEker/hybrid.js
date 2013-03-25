@@ -14,9 +14,10 @@ var _r = (function() {
     setJquery: true,
     Implements: [Options],
     source:"http://requirejs.org/docs/release/2.1.5/minified/require.js",
-    options: function(){
+    options: {
         fail:function(){
-           console.log('Unable to load require.js'); 
+           console.log('Unable to load require.js');
+           return false;
         }
     },
     initialize: function(d,c,h,options){
