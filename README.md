@@ -1,13 +1,17 @@
 hybrid.js
 =========
+**by sinan eker**
 
-hybrid.js is a MooTools and jQuery composer. 
+
+**hybrid.js** is a MooTools and jQuery composer. 
 You can call jQuery function in interaction with MooTools OOP coding. 
 Additionally there is a plugin for twitter's bootstrap and RequireJS. That means you can use a few libs handled from one MooTools Class.
 Also it's possible to get the result of the last called action.
 That is useful for AJAX requests oder DOM manipulation. There is a small datepicker migration for bootstrap. (For further information about datepicker: http://www.eyecon.ro/bootstrap-datepicker/) 
 
-***
+Soma links:
+* [Bootstrap](http://twitter.github.com/bootstrap/base)
+* [RequireJS](http://requirejs.org/)
 
 Usage
 =====
@@ -99,4 +103,20 @@ _.getLast() // Get the last result of an function execution
 _.store(t, k) // Stores a result of an function execution
 ```
 
+
+###License:
+
+   > Copyright 2013 sinan eker
+
+   > Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   > [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+   > Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 
