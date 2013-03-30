@@ -27,12 +27,14 @@ Installation
 ============
 
 Download the source. For production I would use _.min.js. The file is compressed and has everything in it.
-For just using the default hybrid.js I would use also the compressed hybrid.min.js file.
+For just using the default hybrid.js I also would use the compressed hybrid.min.js file.
 ***
 
 A code example: 
 ```javascript
-var app = new _('body',function(t,$){
+var app = new _('body',function(t, $){
+  // $ is jQuery
+  // t is the element | similary to $(this)
   $(t).text('Hello World!');  
 });
 ```
@@ -122,7 +124,7 @@ var colorChanger = (function() {
   return new Class({
     Extends: _, // hybrid
     Implements: Options, 
-    jQuery: 'colorChanger', // register to jquery namespace
+    jQuery: 'colorChanger', // register to jquery namespace @see jQuery MooTools Mutator
     options: {
       backgroundColor: private_store.defaultColor // default text color
     },
@@ -150,6 +152,14 @@ var instance = new colorChanger('body',{
 });
 
 ```
+
+###Error handling:
+
+* Errors will catched and displayed in the js console. 
+
+###Bugs?
+
+* Please report bugs to me here on github. Sorry for my strange english, but I'm only 15 years old and from germany :D
 
 ###License:
 
