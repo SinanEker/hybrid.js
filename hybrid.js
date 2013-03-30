@@ -8,7 +8,11 @@
  * * * http://www.apache.org/licenses/LICENSE-2.0
  */
 var _ = (function () {
-    var defaults = {
+    function fE(e){
+        console.log(e);
+        return false;
+    }
+    var d = {
         __proto__: null,
         jQuery: window.jQuery
     },
@@ -16,10 +20,10 @@ var _ = (function () {
         store = {
             __proto__: null
         };
-    Class.Mutators.setJquery = function (bool){
-        if(bool){
+    Class.Mutators.setJquery = function (b){
+        if(b){
             return this.prototype.setOptions({
-                jQuery: defaults.jQuery
+                jQuery: d.jQuery
             });
         }
     };
@@ -28,17 +32,17 @@ var _ = (function () {
             baseStore: arg
         });
     };
-    Class.Mutators.jQuery = function (name) {
-        var self = this;
-        defaults.jQuery.fn[name] = function (arg) {
+    Class.Mutators.jQuery = function (n) {
+        var s = this;
+        d.jQuery.fn[n] = function (arg) {
             var args = Array.prototype.slice.call(arguments, 1);
             if (typeOf(arg) == 'string') {
-                var instance = defaults.jQuery(this).data(name);
-                if (instance) {
-                    instance[arg].apply(instance, args);
+                var i = d.jQuery(this).data(n);
+                if (i) {
+                    i[arg].apply(i, args);
                 }
             } else {
-                defaults.jQuery(this).data(name, new self(this.selector, defaults.jQuery.extend(self.prototype.options, arg)));
+                d.jQuery(this).data(n, new s(this.selector, d.jQuery.extend(s.prototype.options, arg)));
             }
         };
     };
@@ -53,36 +57,47 @@ var _ = (function () {
         }
     });
     hybrid.Factory = new Class({
-        Implements: [Options],
+        Implements: Options,
         baseStore: store,
-        initialize: function (jquery) {
+        initialize: function () {
             this.last = '';
             this.res = [];
             return this;
         },
         store: function (t, k) {
-            this.last = k;
-            return this.res[k] = t;
+            try {
+                return this.res[this.last = k] = t;
+            } catch (e) {
+                return fE(e);
+            }
         },
         clear: function () {
-            this.res = undefined;
             this.res = [];
         },
         getLast: function () {
             return (this.res[this.last] !== undefined ? this.res[this.last] : {__proto__:null});
         },
         get: function (k) {
-            return (this.res[k] !== undefined ? this.res[k] : {__proto__:null});
+            try {
+                return (this.res[k] !== undefined ? this.res[k] : {__proto__:null});
+            } catch (e) {
+                return fE(e);
+            }
         }
     });
     hybrid.Maker = new Class({
         Extends: hybrid.Factory,
         initialize: function (jquery, options) {
-            this.parent(jquery);
-            var m = new hybrid.AjaxCallbacks();
-            jquery.extend(m, options);
-            this.store(jquery.ajax(m), 'Maker');
-            return this;
+            try {
+                this.parent(jquery);
+                var m = new hybrid.AjaxCallbacks();
+                jquery.extend(m, options);
+                this.store(jquery.ajax(m), 'Maker');
+            } catch (e) {
+                return fE(e);
+            } finally {
+                return this;
+            }
         },
         lastRequest: function () {
             return this.res['Maker'];
@@ -92,7 +107,7 @@ var _ = (function () {
         Extends: hybrid.Factory,
         jQuery: 'hybrid', // with that you can access hybrid in jQuery via $.fn.hybrid
         options: {
-            jq: defaults.jQuery
+            jq: d.jQuery
         },
         initialize: function (a, b, options) {
             a = a || undefined;
@@ -100,21 +115,25 @@ var _ = (function () {
             this.setOptions(options);
             this.jQuery = this.options.jq;
             this.parent(this.jQuery);
-            if (typeOf(b) == 'function') {
-                var c = (a !== undefined ? this.jQuery(a) : undefined);
-                return this.store(b.apply(this, [c, this.jQuery]), 'initialize');
+            try {
+                return (typeOf(b) == 'function' ? this.store(b.apply(this, [(a !== undefined ? this.jQuery(a) : undefined), this.jQuery]), 'initialize') : (a !== undefined && b !== undefined ? this.store(this.jQuery(a, b), 'initialize') : (!a ? this : this.store(this.jQuery(a), 'initialize'))));
+            } catch (e) {
+                return fE(e);
             }
-            return (a !== undefined && b !== undefined ? this.store(this.jQuery(a, b), 'initialize') : (!a ? this : this.store(this.jQuery(a), 'initialize')));
         },
         $: function (a) {
             return this.store((!a ? [] : this.jQuery(a)), '$');
         },
         ajax: function (a) {
             a = a || {};
-            var r, maker = new hybrid.Maker(this.jQuery, a);
-            r = maker.lastRequest();
-            maker.clear();
-            return r;
+            try {
+                var r, maker = new hybrid.Maker(this.jQuery, a);
+                r = maker.lastRequest();
+                maker.clear();
+                return r;
+            } catch (e) {
+                return fE(e);
+            }
         }
     });
 })();
