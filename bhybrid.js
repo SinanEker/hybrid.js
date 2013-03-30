@@ -3,6 +3,7 @@
  * @copyright: sinan eker, selsyourself@gmail.com
  * @description: This script is a hybrid extension.
  * @required: MooTools, jQuery, hybrid.js, bootstrap.js
+ * @compatible with Bootstrap version 2.3.1
  * @license:
  * * * Licensed under the Apache License, Version 2.0
  * * * http://www.apache.org/licenses/LICENSE-2.0
@@ -20,7 +21,7 @@ var _b = (function() {
   })();
   _.StringValidation = (function() {
     return new Class({
-      initialize:function(){
+      initialize: function(){
         return this;
       },
       stringCollection: function(array,arg){
@@ -58,71 +59,30 @@ var _b = (function() {
   return new Class({
     Extends: _,
     jQuery: 'bhybrid',
-    initialize: function (element) {
-      this.parent(element);
+    initialize: function (ele) {
+      this.parent(ele);
       return this;
     },
     modal: function (arg) {
       arg = arg || undefined;
-      if(arg == undefined){
-        return this.store(this.get('initialize').modal(),'modal');   
-      }else{
-        var l = new _.StringValidation();
-        if(l.stringCollection(['toggle','show','hide'],arg) || l.stringCollection(['backdrop','keyboard','show','remote'],arg)){
-          return this.store(this.get('initialize').modal(arg),'modal');    
-        }else{
-          return [];
-        }
-      }
+      var l = new _.StringValidation();
+      return (arg == undefined ? this.store(this.get('initialize').modal(),'modal') : (l.stringCollection(['toggle','show','hide'],arg) || l.stringCollection(['backdrop','keyboard','show','remote'],arg) ? this.store(this.get('initialize').modal(arg),'modal') : []));
     },
     tooltip: function (arg) {
       arg = arg || undefined;
-      if(arg == undefined){
-        return this.store(this.get('initialize').tooltip(),'tooltip');   
-      }else{
-        var l = new _.StringValidation();
-        if(l.stringCollection(['toggle','show','hide','destroy'],arg) || l.stringCollection(['animation','html','placement','selector','title','trigger','delay','container'],arg)){
-          return this.store(this.get('initialize').tooltip(arg),'tooltip');    
-        }else{
-          return [];
-        }
-      }
+      var l = new _.StringValidation();
+      return (arg == undefined ? this.store(this.get('initialize').tooltip(),'tooltip') : (l.stringCollection(['toggle','show','hide','destroy'],arg) || l.stringCollection(['animation','html','placement','selector','title','trigger','delay','container'],arg) ? this.store(this.get('initialize').tooltip(arg),'tooltip') : []))
     },
     popover: function (arg) {
       arg = arg || undefined;
-      if(arg == undefined){
-        return this.store(this.get('initialize').popover(),'popover');   
-      }else{
-        var l = new _.StringValidation();
-        if(l.stringCollection(['toggle','show','hide','destroy'],arg) || l.stringCollection(['animation','html','placement','selector','trigger','title','content','delay','container'],arg)){
-          return this.store(this.get('initialize').popover(arg),'popover');    
-        }else{
-          return [];
-        }
-      }
+      var l = new _.StringValidation();
+      return (arg == undefined ? this.store(this.get('initialize').popover(),'popover') : (l.stringCollection(['toggle','show','hide','destroy'],arg) || l.stringCollection(['animation','html','placement','selector','trigger','title','content','delay','container'],arg) ? this.store(this.get('initialize').popover(arg),'popover') : []));
     },
     datepicker: function (arg,clb) { // not in bootstrap
       arg = arg || undefined;
       clb = clb || undefined;
-      var e = this.get('initialize');
-      if(this.jQuery.fn.datepicker == undefined){
-        return new _.DatepickerInit(this.jQuery);
-      }else{
-        var l = new _.StringValidation();
-        if(typeOf(arg) == 'object' && arg.setValue !== undefined){
-          return this.store(e.datepicker('setValue',arg.setValue),'datepicker');  
-        }else{
-          if(arg == undefined){
-            return this.store(e.datepicker(),'datepicker');    
-          }else{
-            if(l.stringCollection(['show','hide','place'],arg) || l.stringCollection(['format','weekStart','viewMode','minViewMode'],arg)){
-              return this.store(e.datepicker(arg),'datepicker');    
-            }else{
-              return [];
-            }
-          }
-        }
-      }
+      var e = this.get('initialize'),l = new _.StringValidation();
+      return (this.jQuery.fn.datepicker == undefined ? new _.DatepickerInit(this.jQuery) : (typeOf(arg) == 'object' && arg.setValue !== undefined ? this.store(e.datepicker('setValue',arg.setValue),'datepicker') : (arg == undefined ? this.store(e.datepicker(),'datepicker') : (l.stringCollection(['show','hide','place'],arg) || l.stringCollection(['format','weekStart','viewMode','minViewMode'],arg) ? this.store(e.datepicker(arg),'datepicker') : []))));
     }
   });
 })();
