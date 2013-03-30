@@ -12,8 +12,8 @@ var _r = (function() {
     Extends: _,
     jQuery:'rhybrid',
     setJquery: true,
-    Implements: [Options],
-    source:"http://requirejs.org/docs/release/2.1.5/minified/require.js",
+    Implements: Options,
+    source: "http://requirejs.org/docs/release/2.1.5/minified/require.js",
     options: {
         fail:function(){
            console.log('Unable to load require.js');
