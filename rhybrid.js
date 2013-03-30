@@ -1,5 +1,5 @@
 /*
- * bhybrid.js
+ * rhybrid.js
  * @copyright: sinan eker, selsyourself@gmail.com
  * @description: This script is a hybrid extension.
  * @required: MooTools, jQuery, hybrid.js, require.js
