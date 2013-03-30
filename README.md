@@ -23,6 +23,12 @@ To use hybrid.js you nee MooTools and jQuery included to your page.
 * [jQuery site](https://jquery.com/)
 
 ***
+Installation
+============
+
+Download the source. For production I would use _.min.js. The file is compressed and has everything in it.
+For just using the default hybrid.js I would use also the compressed hybrid.min.js file.
+***
 
 A code example: 
 ```javascript
@@ -103,6 +109,47 @@ _.getLast() // Get the last result of an function execution
 _.store(t, k) // Stores a result of an function execution
 ```
 
+###Bulding a plugin:
+
+A color changer example:
+
+```javascript
+var colorChanger = (function() {
+  var private_store = {
+    __proto__: null,
+    defaultColor: 'red'
+  };
+  return new Class({
+    Extends: _, // hybrid
+    Implements: Options, 
+    jQuery: 'colorChanger', // register to jquery namespace
+    options: {
+      backgroundColor: private_store.defaultColor // default text color
+    },
+    initialize: function(ele,options,clb){
+      this.setOptions(options);
+      this.parent(ele);
+      return clb.apply(this, [this.options,this.get('initialize')]); // would return the jQuery object from ele.
+    }
+  }).extend({
+    staticMethod: function (){ // a static methode. colorChanger.staticMethod() // return true
+      return true;
+    }
+  });
+})();
+window.colorChanger = colorChanger;
+
+// Test:
+
+var instance = new colorChanger('body',{
+  backgroundColor: '#99aa99'.hexToRgb() // mootools hexToRgb
+},function (options,ele){
+  return ele.css({
+    'background-color': options.backgroundColor
+  });
+});
+
+```
 
 ###License:
 
