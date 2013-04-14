@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Hybrid.js by SinanEker</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Hybrid.js</h1>
+        <p>hybrid.js</p>
+        <p class="view"><a href="https://github.com/SinanEker/hybrid.js">View the Project on GitHub <small>SinanEker/hybrid.js</small></a></p>
+        <ul>
+          <li><a href="https://github.com/SinanEker/hybrid.js/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/SinanEker/hybrid.js/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/SinanEker/hybrid.js">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>hybrid.js</h1>
+
+<p><strong>by sinan eker</strong></p>
+
+<p><strong>hybrid.js</strong> is a MooTools and jQuery composer. 
+You can call jQuery function in interaction with MooTools OOP coding. 
+Additionally there is a plugin for twitter's bootstrap and RequireJS. That means you can use a few libs handled from one MooTools Class.
+Also it's possible to get the result of the last called action.
+That is useful for AJAX requests oder DOM manipulation. There is a small datepicker migration for bootstrap. (For further information about datepicker: <a href="http://www.eyecon.ro/bootstrap-datepicker/">http://www.eyecon.ro/bootstrap-datepicker/</a>) </p>
+
+<p>Some links:</p>
+
+<ul>
+<li><a href="http://twitter.github.com/bootstrap/base">Bootstrap</a></li>
+<li><a href="http://requirejs.org/">RequireJS</a></li>
+</ul><h1>Usage</h1>
+
+<p><strong>before you read on!</strong></p>
+
+<hr><p>To use hybrid.js you nee MooTools and jQuery included to your page.</p>
+
+<ul>
+<li><a href="http://mootools.net/download">MooTools download site</a></li>
+<li><a href="https://jquery.com/">jQuery site</a></li>
+</ul><hr><h1>Installation</h1>
+
+<p>Download the source. For production I would use _.min.js. The file is compressed and has everything in it.
+For just using the default hybrid.js I also would use the compressed hybrid.min.js file.</p>
+
+<hr><p>A code example: </p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">_</span><span class="p">(</span><span class="s1">'body'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">$</span><span class="p">){</span>
+  <span class="c1">// $ is jQuery</span>
+  <span class="c1">// t is the element | similary to $(this)</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nx">t</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'Hello World!'</span><span class="p">);</span>  
+<span class="p">});</span>
+</pre></div>
+
+<p>And with an ajax request:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="nx">url</span><span class="o">:</span> <span class="s1">'/echo/json/'</span><span class="p">,</span>
+    <span class="nx">dataType</span><span class="o">:</span> <span class="s1">'json'</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span><span class="s1">'POST'</span><span class="p">,</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">json</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">encode</span><span class="p">({</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s1">'some text'</span><span class="p">,</span>
+            <span class="nx">array</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'three'</span><span class="p">],</span>
+            <span class="nx">object</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">par1</span><span class="o">:</span> <span class="s1">'another text'</span><span class="p">,</span>
+                <span class="nx">par2</span><span class="o">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'one'</span><span class="p">],</span>
+                <span class="nx">par3</span><span class="o">:</span> <span class="p">{}</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="p">},</span>
+    <span class="nx">cache</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span>
+    <span class="nx">beforeSend</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">new</span> <span class="nx">_</span><span class="p">(</span><span class="s1">'#state'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">$</span><span class="p">(</span><span class="nx">t</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="nx">complete</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">new</span> <span class="nx">_</span><span class="p">(</span><span class="s1">'#state'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">$</span><span class="p">(</span><span class="nx">t</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span><span class="o">+</span><span class="s2">" "</span><span class="o">+</span><span class="nx">state</span><span class="p">.</span><span class="nx">statusText</span><span class="o">+</span><span class="s2">"\n"</span><span class="p">);</span>
+            <span class="nx">$</span><span class="p">(</span><span class="s1">'#response'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s2">"Response: \n"</span><span class="o">+</span><span class="nx">state</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>jQuery MooTools Mutator:</p>
+
+<div class="highlight"><pre><span class="k">new</span> <span class="nx">Class</span><span class="p">({</span>
+  <span class="nx">jQuery</span><span class="o">:</span><span class="s1">'the_name'</span><span class="p">,</span> <span class="c1">// this class is now in jQuery.fn.the_name</span>
+  <span class="nx">someFunction</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<hr><h3>Main methods:</h3>
+
+<div class="highlight"><pre><span class="nx">_</span><span class="p">.</span><span class="nx">$</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// same as jQuery()</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// executes a jQuery.ajax request</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="c1">// initialize hybrid.js </span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">parent</span><span class="p">(</span><span class="nx">jQuery</span><span class="p">)</span> <span class="c1">// Not so important.</span>
+</pre></div>
+
+<p>Inherited from Options:</p>
+
+<div class="highlight"><pre><span class="nx">_</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="c1">// sets the options</span>
+</pre></div>
+
+<p>Inherited from hybrid.Factory:</p>
+
+<div class="highlight"><pre><span class="nx">_</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span> <span class="c1">// Clears the factory store</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span> <span class="c1">// Get a value by a key</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">getLast</span><span class="p">()</span> <span class="c1">// Get the last result of an function execution</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">store</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">k</span><span class="p">)</span> <span class="c1">// Stores a result of an function execution</span>
+</pre></div>
+
+<h3>Bulding a plugin:</h3>
+
+<p>A color changer example:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">colorChanger</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">private_store</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">__proto__</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">defaultColor</span><span class="o">:</span> <span class="s1">'red'</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Class</span><span class="p">({</span>
+    <span class="nx">Extends</span><span class="o">:</span> <span class="nx">_</span><span class="p">,</span> <span class="c1">// hybrid</span>
+    <span class="nx">Implements</span><span class="o">:</span> <span class="nx">Options</span><span class="p">,</span> 
+    <span class="nx">jQuery</span><span class="o">:</span> <span class="s1">'colorChanger'</span><span class="p">,</span> <span class="c1">// register to jquery namespace @see jQuery MooTools Mutator</span>
+    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="nx">private_store</span><span class="p">.</span><span class="nx">defaultColor</span> <span class="c1">// default text color</span>
+    <span class="p">},</span>
+    <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ele</span><span class="p">,</span><span class="nx">options</span><span class="p">,</span><span class="nx">clb</span><span class="p">){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">parent</span><span class="p">(</span><span class="nx">ele</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">clb</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'initialize'</span><span class="p">)]);</span> <span class="c1">// would return the jQuery object from ele.</span>
+    <span class="p">}</span>
+  <span class="p">}).</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">staticMethod</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(){</span> <span class="c1">// a static methode. colorChanger.staticMethod() // return true</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">})();</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">colorChanger</span> <span class="o">=</span> <span class="nx">colorChanger</span><span class="p">;</span>
+
+<span class="c1">// Test:</span>
+
+<span class="kd">var</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">colorChanger</span><span class="p">(</span><span class="s1">'body'</span><span class="p">,{</span>
+  <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">'#99aa99'</span><span class="p">.</span><span class="nx">hexToRgb</span><span class="p">()</span> <span class="c1">// mootools hexToRgb</span>
+<span class="p">},</span><span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span><span class="nx">ele</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+    <span class="s1">'background-color'</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">backgroundColor</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+</pre></div>
+
+<h3>Error handling:</h3>
+
+<ul>
+<li>Errors will catched and displayed in the js console. </li>
+</ul><h3>Bugs?</h3>
+
+<ul>
+<li>Please report bugs to me here on github. Sorry for my strange english, but I'm only 15 years old and from germany :D</li>
+</ul><h3>License:</h3>
+
+<blockquote>
+<p>Copyright 2013 sinan eker</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at</p>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.</p>
+</blockquote>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/SinanEker">SinanEker</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
